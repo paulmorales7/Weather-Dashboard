@@ -23,3 +23,8 @@ h1{
     font-weight: bold;
     color: white;
 }
+
+.card-forecast{
+    margin-right: 30px;
+    border-color: black;
+}
