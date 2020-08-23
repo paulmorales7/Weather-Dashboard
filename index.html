@@ -71,7 +71,7 @@
 
             var queryUrl1 = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&appid=f8e40ca0d9f473652de024430ca2214d"
 
-            var queryUrl2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely&appid=f8e40ca0d9f473652de024430ca2214d"
+
 
 
             $.ajax({
@@ -88,16 +88,20 @@
                 $(".humidity").text("Humidity: " + response.main.humidity);
                 $(".Temp").text("Temperature: " + tempF.toFixed(2))
 
+                var queryUrl2 = "https:// api.openweathermap.org/data/2.5/forecast/daily?q=" + input + "&cnt=6&appid=f8e40ca0d9f473652de024430ca2214d"
+                // api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely&appid=f8e40ca0d9f473652de024430ca2214d"
+
+                $.ajax({
+                    url: queryUrl2,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response)
+
+                    //  $(".card-text").text("Forecast: " + JSON.parse(response.daily[0]))
+                })
             })
 
-            $.ajax({
-                url: queryUrl2,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response)
 
-                $(".card-text").text("")
-            })
         })
 
 
