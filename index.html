@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="buttons-view"></div>
+
+    <div class="jumbotron" style="background-color: black;">
+        <div class="jumbotron-container">
+            <h1 class="display-4">Weather Dashboard</h1>
+        </div>
+    </div>
+
+    <div class="search-box">
+        <h1>Search for a City:</h1>
+        <input class="search-text" type="text">
+        <a class="search-input" href="#"></a>
+        <button class="searchBtn">🔎</button>
+    </div>
+
+    <div class="card" style="width: 18rem">
+        <div class="card-body">
+            <h5 class="City-title"></h5>
+            <div class="Temp"></div>
+            <div class="wind"></div>
+            <div class="uvIndex"></div>
+            <div class="humidity"></div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+        // var city = "alaska"
+
+
+        // "https://api.openweathermap.org/data/2.5/forecast?q=" + input.value + "&appid=f8e40ca0d9f473652de024430ca2214d"
+
+
+
+
+        // "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + input + "&cnt=6&appid=f8e40ca0d9f473652de024430ca2214d"
+
+
+
+        $(".searchBtn").on("click", function (event) {
+
+            event.preventDefault();
+            $("#buttons-view").empty();
+
+            var input = $(".search-text").val().trim();
+
+            var queryUrl = "api.openweathermap.org/data/2.5/forecast/daily?q=" + input + "&mode=xml&units=metric&cnt=7&appid=f8e40ca0d9f473652de024430ca2214d"
+
+            // "https://api.openweathermap.org/data/2.5/weather?" +
+            //     "q=" + input + "&appid=f8e40ca0d9f473652de024430ca2214d"
+
+            // "api.openweathermap.org/data/2.5/forecast/daily?q=" + input + "&cnt=6&appid=f8e40ca0d9f473652de024430ca2214d"
+
+            console.log(queryUrl)
+
+
+
+            $.ajax({
+                url: queryUrl,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response)
+
+                var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+
+
+                $(".City-title").html(response.name);
+                $(".wind").text("Wind Speed: " + response.wind.speed);
+                $(".humidity").text("Humidity: " + response.main.humidity);
+                $(".Temp").text("Temperature: " + tempF.toFixed(2))
+            })
+        })
+
+
+    </script>
+
+</body>
+
+</html>
