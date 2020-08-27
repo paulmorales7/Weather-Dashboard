@@ -24,7 +24,22 @@ h1{
     color: white;
 }
 
-.card-forecast{
-    margin-right: 30px;
-    border-color: black;
+.card-forecast1{
+    display: inline-block
+}
+.card-forecast2{
+    display: inline-block;
+    
+}
+.card-forecast3{
+    display: inline-block;
+   
+}
+.card-forecast4{
+    display: inline-block
+    
+}
+.card-forecast5{
+    display: inline-block
+    
 }

@@ -30,23 +30,67 @@
     <div class="card" style="width: 18rem">
         <div class="card-body">
             <h5 class="City-title"></h5>
+            <img src="" class="icon1"></img>
             <div class="Temp"></div>
             <div class="wind"></div>
-            <div class="uvIndex"></div>
             <div class="humidity"></div>
+            <div class="uvIndex"></div>
         </div>
     </div>
 
-    <div class="card-forecast" style="width: 30rem">
+    <div class="card-forecast1" style="width: 18rem">
         <div class="card-body">
-            <h5 class="card-title">5 Day Forecast:</h5>
+            <h5 class="date"></h5>
+            <img src="" class="icon"></img>
             <p class="card-text"></p>
+            <div class="Temp"></div>
+            <div class="humidity"></div>
+
+        </div>
+    </div>
+    <div class="card-forecast2" style="width: 18rem">
+        <div class="card-body">
+            <h5 class="date"></h5>
+            <img src="" class="icon"></img>
+            <p class="card-text"></p>
+            <div class="Temp"></div>
+            <div class="humidity"></div>
+        </div>
+    </div>
+    <div class="card-forecast3" style="width: 18rem">
+        <div class="card-body">
+            <h5 class="date"></h5>
+            <img src="" class="icon"></img>
+            <p class="card-text"></p>
+            <div class="Temp"></div>
+            <div class="humidity"></div>
+        </div>
+    </div>
+    <div class="card-forecast4" style="width: 18rem">
+        <div class="card-body">
+            <h5 class="date"></h5>
+            <img src="" class="icon"></img>
+            <p class="card-text"></p>
+            <div class="Temp"></div>
+            <div class="humidity"></div>
+        </div>
+    </div>
+    <div class="card-forecast5" style="width: 18rem">
+        <div class="card-body">
+            <h5 class="date"></h5>
+            <img src="" class="icon"></img>
+            <p class="card-text"></p>
+            <div class="Temp"></div>
+            <div class="humidity"></div>
         </div>
     </div>
 
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+        integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
+        crossorigin="anonymous"></script>
     <script type="text/javascript">
 
 
@@ -78,26 +122,53 @@
                 url: queryUrl1,
                 method: "GET"
             }).then(function (response) {
+                // console.log(response)
                 var longitude = (response.coord.lon)
                 var latitude = (response.coord.lat)
 
                 var tempF = (response.main.temp - 273.15) * 1.80 + 32;
 
-                $(".City-title").html(response.name);
+                var icon1 = response.weather[0].icon;
+
+                var iconUrl1 = "http://openweathermap.org/img/w/" + icon1 + ".png"
+
+                $(".City-title").html(response.name + " " + moment.unix(response.dt).format("l"));
+                $(".icon1").attr("src", iconUrl1)
+
                 $(".wind").text("Wind Speed: " + response.wind.speed);
                 $(".humidity").text("Humidity: " + response.main.humidity);
                 $(".Temp").text("Temperature: " + tempF.toFixed(2))
 
-                var queryUrl2 = "https:// api.openweathermap.org/data/2.5/forecast/daily?q=" + input + "&cnt=6&appid=f8e40ca0d9f473652de024430ca2214d"
-                // api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely&appid=f8e40ca0d9f473652de024430ca2214d"
+                var queryUrl2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely&appid=f8e40ca0d9f473652de024430ca2214d"
+
+                // "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + input + "&cnt=6&appid=d1804274dc5cec81cffc619f1e9d5e51"
 
                 $.ajax({
                     url: queryUrl2,
                     method: "GET"
                 }).then(function (response) {
                     console.log(response)
+                    console.log(response.daily[i].weather[0].icon)
 
-                    //  $(".card-text").text("Forecast: " + JSON.parse(response.daily[0]))
+                    var iconcode = response.daily[i].weather[0].icon;
+
+                    var iconUrl = "http://openweathermap.org/img/w/" + iconcode + ".png"
+
+                    $(".uvIndex").text("UV Index: " + response.daily[0].uvi)
+
+                    for (var i = 1; i <= 5; i++) {
+
+                        $(`.card-forecast${i} .humidity`).text("Humidity: " + JSON.stringify(response.daily[i].humidity))
+                        $(`.card-forecast${i} .date`).text(moment.unix(response.daily[i].dt).format("l"))
+                        $(`.card-forecast${i} .icon`).attr("src", iconUrl)
+                        $(`card-forecast${i}) .temp`).text("Temperature " + JSON.stringify(response.daily[i].temp))
+                    }
+
+
+
+
+
+
                 })
             })
 
