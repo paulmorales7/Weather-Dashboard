@@ -43,7 +43,7 @@
             <h5 class="date"></h5>
             <img src="" class="icon"></img>
             <p class="card-text"></p>
-            <div class="Temp"></div>
+            <div class="temp"></div>
             <div class="humidity"></div>
 
         </div>
@@ -53,7 +53,7 @@
             <h5 class="date"></h5>
             <img src="" class="icon"></img>
             <p class="card-text"></p>
-            <div class="Temp"></div>
+            <div class="temp"></div>
             <div class="humidity"></div>
         </div>
     </div>
@@ -62,7 +62,7 @@
             <h5 class="date"></h5>
             <img src="" class="icon"></img>
             <p class="card-text"></p>
-            <div class="Temp"></div>
+            <div class="temp"></div>
             <div class="humidity"></div>
         </div>
     </div>
@@ -71,7 +71,7 @@
             <h5 class="date"></h5>
             <img src="" class="icon"></img>
             <p class="card-text"></p>
-            <div class="Temp"></div>
+            <div class="temp"></div>
             <div class="humidity"></div>
         </div>
     </div>
@@ -80,7 +80,7 @@
             <h5 class="date"></h5>
             <img src="" class="icon"></img>
             <p class="card-text"></p>
-            <div class="Temp"></div>
+            <div class="temp"></div>
             <div class="humidity"></div>
         </div>
     </div>
@@ -148,20 +148,22 @@
                     method: "GET"
                 }).then(function (response) {
                     console.log(response)
-                    console.log(response.daily[i].weather[0].icon)
 
-                    var iconcode = response.daily[i].weather[0].icon;
 
-                    var iconUrl = "http://openweathermap.org/img/w/" + iconcode + ".png"
 
                     $(".uvIndex").text("UV Index: " + response.daily[0].uvi)
 
                     for (var i = 1; i <= 5; i++) {
+                        var iconcode = response.daily[i].weather[0].icon;
+
+                        var iconUrl = "http://openweathermap.org/img/w/" + iconcode + ".png"
+
+                        var tempF1 = (response.daily[i].temp.day - 273.15) * 1.80 + 32
 
                         $(`.card-forecast${i} .humidity`).text("Humidity: " + JSON.stringify(response.daily[i].humidity))
                         $(`.card-forecast${i} .date`).text(moment.unix(response.daily[i].dt).format("l"))
                         $(`.card-forecast${i} .icon`).attr("src", iconUrl)
-                        $(`card-forecast${i}) .temp`).text("Temperature " + JSON.stringify(response.daily[i].temp))
+                        $(`.card-forecast${i} .temp`).text("Temperature: " + (tempF1.toFixed(2)))
                     }
 
 
