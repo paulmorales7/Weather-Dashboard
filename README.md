@@ -19,10 +19,10 @@ search bar.
   # Usage
   Search any citys 5 day forcast and plan ahead
   # License
-  License selected displayed in description. You have selected
-  apache
+  License selected displayed in description. 
+  Apache
   # Contributing
-  I worked on this project alone
+  Paul Morales
   # Tests
   none
   # Questions
