@@ -12,7 +12,7 @@
 
   # Description
   ![License](https://img.shields.io/badge/License-apache-blue.svg "License Badge")
-   - This app allows users to check the 5 day forcast of any city by inputing the name of the city in the 
+   - This app allows users to check the 5 day forcast of any city by inputting the name of the city in the 
 search bar.
   # Installation
   none
