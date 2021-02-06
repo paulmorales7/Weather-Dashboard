@@ -20,7 +20,6 @@ search bar.
   Simply search for any city in the search bar and the 5 day forcast will appear 
   # License
   License selected displayed in description. 
-  Apache
   # Contributing
   Paul Morales
   # Tests
