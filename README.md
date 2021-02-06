@@ -17,7 +17,7 @@ search bar.
   # Installation
   none
   # Usage
-  Search any citys 5 day forcast and plan ahead
+  Simply search for any city in the search bar and the 5 day forcast will appear 
   # License
   License selected displayed in description. 
   Apache
